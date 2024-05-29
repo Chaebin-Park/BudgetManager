@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_widgetkit/flutter_widgetkit.dart';
 import 'travel_database.dart';
 import 'budget_page.dart';
 
@@ -49,6 +52,15 @@ class _TravelPageState extends State<TravelPage> {
     setState(() {
       travelList = travelListWithTravellers;
     });
+    _updateWidgetData();
+  }
+
+  Future<void> _updateWidgetData() async {
+    // Serialize your travel data and save to UserDefaults or AppGroup
+    List<Map<String, dynamic>> travels = await DatabaseHelper().getTravels();
+    String jsonString = jsonEncode(travels);
+    await WidgetKit.setItem('travelData', jsonString, 'group.com.cbpark.budget_manager');
+    WidgetKit.reloadAllTimelines();
   }
 
   void _addTravel(Map<String, dynamic> travelData) async {

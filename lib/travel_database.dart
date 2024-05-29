@@ -149,6 +149,16 @@ class DatabaseHelper {
     return await db.query('expenses', where: 'travel_id = ?', whereArgs: [travelId]);
   }
 
+  Future<List<Map<String, dynamic>>> getAllExpenses() async {
+    Database db = await database;
+    return await db.query('expenses');
+  }
+
+  Future<List<Map<String, dynamic>>> getAllTravellers() async {
+    Database db = await database;
+    return await db.query('travellers');
+  }
+
   Future<List<Map<String, dynamic>>> getExpenseTravellers(int expenseId) async {
     Database db = await database;
     return await db.query('expense_travellers', where: 'expense_id = ?', whereArgs: [expenseId]);

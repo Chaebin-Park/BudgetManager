@@ -8,6 +8,7 @@ import UIKit
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
+    UserDefaults.standard.addSuite(named: "group.com.cbpark.budget_manager")
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
