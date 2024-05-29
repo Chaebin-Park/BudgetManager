@@ -160,19 +160,34 @@ class DatabaseHelper {
     return await db.delete('expenses', where: 'id = ?', whereArgs: [expenseId]);
   }
 
-  Future<int> updateExpenseWithTravellers(
-      Map<String, dynamic> expense, List<Map<String, dynamic>> expenseTravellers) async {
+  Future<int> updateExpenseWithTravellers(Map<String, dynamic> expense, List<bool> selectedTravellers, List<Map<String, dynamic>> travellerList) async {
     Database db = await database;
+
+    // Update the expense
     await db.update(
       'expenses',
       expense,
       where: 'id = ?',
       whereArgs: [expense['id']],
     );
-    await db.delete('expense_travellers', where: 'expense_id = ?', whereArgs: [expense['id']]);
-    for (var expenseTraveller in expenseTravellers) {
-      await db.insert('expense_travellers', expenseTraveller);
+
+    // Delete old expense_travellers entries
+    await db.delete(
+      'expense_travellers',
+      where: 'expense_id = ?',
+      whereArgs: [expense['id']],
+    );
+
+    // Insert new expense_travellers entries
+    for (int i = 0; i < selectedTravellers.length; i++) {
+      if (selectedTravellers[i]) {
+        await db.insert('expense_travellers', {
+          'expense_id': expense['id'],
+          'traveller_id': travellerList[i]['id'],
+        });
+      }
     }
+
     return 1;
   }
 }

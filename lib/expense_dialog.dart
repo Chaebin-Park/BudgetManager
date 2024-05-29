@@ -8,7 +8,7 @@ class ExpenseDialog extends StatefulWidget {
   final Map<String, dynamic>? expense;
   final List<bool>? selectedTravellers;
 
-  const ExpenseDialog({super.key,
+  ExpenseDialog({
     required this.travelId,
     required this.travellerList,
     required this.onSave,
@@ -17,7 +17,7 @@ class ExpenseDialog extends StatefulWidget {
   });
 
   @override
-  State<ExpenseDialog> createState() => _ExpenseDialogState();
+  _ExpenseDialogState createState() => _ExpenseDialogState();
 }
 
 class _ExpenseDialogState extends State<ExpenseDialog> {
@@ -28,12 +28,9 @@ class _ExpenseDialogState extends State<ExpenseDialog> {
   @override
   void initState() {
     super.initState();
-    _nameController =
-        TextEditingController(text: widget.expense?['name'] ?? '');
-    _amountController = TextEditingController(
-        text: widget.expense?['amount']?.toString() ?? '');
-    _selectedTravellers = widget.selectedTravellers ??
-        List<bool>.filled(widget.travellerList.length, false);
+    _nameController = TextEditingController(text: widget.expense?['name'] ?? '');
+    _amountController = TextEditingController(text: widget.expense?['amount']?.toString() ?? '');
+    _selectedTravellers = widget.selectedTravellers ?? List<bool>.filled(widget.travellerList.length, false);
   }
 
   @override
@@ -46,16 +43,16 @@ class _ExpenseDialogState extends State<ExpenseDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: '사용처'),
+              decoration: InputDecoration(labelText: '사용처 이름'),
             ),
             TextField(
               controller: _amountController,
-              decoration: const InputDecoration(labelText: '금액'),
+              decoration: InputDecoration(labelText: '금액'),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
-            const SizedBox(height: 10),
-            const Text('관련 여행자들'),
+            SizedBox(height: 10),
+            Text('관련 여행자들'),
             ...widget.travellerList.asMap().entries.map((entry) {
               int index = entry.key;
               var traveller = entry.value;
@@ -75,11 +72,12 @@ class _ExpenseDialogState extends State<ExpenseDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('취소'),
+          child: Text('취소'),
         ),
         ElevatedButton(
           onPressed: () {
             Map<String, dynamic> expenseData = {
+              'id': widget.expense?['id'],
               'travel_id': widget.travelId,
               'name': _nameController.text,
               'amount': int.tryParse(_amountController.text) ?? 0,
@@ -87,7 +85,7 @@ class _ExpenseDialogState extends State<ExpenseDialog> {
             widget.onSave(expenseData, _selectedTravellers);
             Navigator.of(context).pop();
           },
-          child: const Text('저장'),
+          child: Text('저장'),
         ),
       ],
     );
