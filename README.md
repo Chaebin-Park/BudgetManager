@@ -2,15 +2,15 @@
 
 Budget manager to travelers.
 
-## Getting Started
+# 여행경비 관리 앱 (Flutter)
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/8d52c174-6003-4b86-9600-aad41dbe6a36">
 
-This project is a starting point for a Flutter application.
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/471cfea6-c415-4f81-be39-a9ba25c55514">
 
-A few resources to get you started if this is your first Flutter project:
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/4738f123-9c78-4a76-bdee-330287e54e26">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/c2d79fb9-1548-4947-9fe4-8697f56d4d83">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/83d842e0-5c27-46b9-992b-3a253755fecd">
+
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/43674202-2148-404c-8928-241f28c8b107">
